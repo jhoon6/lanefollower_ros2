@@ -6,3 +6,6 @@
 - Nvidia Jetson nano
 - OpenCV
 - ROS2 Foxy
+
+## todo:
+- [ ] Working video upload
