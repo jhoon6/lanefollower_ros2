@@ -7,6 +7,7 @@
 #include <signal.h>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/int32.hpp"
+#include "geometry_msgs/msg/vector3.hpp"
 #include "lanefollower_ros2/dxl.hpp"
 #include "opencv2/opencv.hpp"
 #include "cv_bridge/cv_bridge.h"

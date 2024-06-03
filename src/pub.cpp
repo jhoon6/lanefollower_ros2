@@ -2,6 +2,9 @@
 #include "lanefollower_ros2/vision.hpp"
 using std::placeholders::_1;
 
+const int def_speed = 100;
+const double k = 0.32;
+
 Mat preprocess(Mat input){
     Mat cut_gray;
     cvtColor(input(Rect(0, 270, 640, 90)), cut_gray, COLOR_BGR2GRAY);
@@ -76,9 +79,8 @@ int calc_err(Mat gray_img) {
 void mysub_callback(rclcpp::Node::SharedPtr node, const sensor_msgs::msg::CompressedImage::SharedPtr msg)
 {
     static auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10));
-    static auto mypub = node->create_publisher<std_msgs::msg::Int32>("/pterr", qos_profile);
-    std_msgs::msg::Int32 msg_err;
-    msg_err.data = 0;
+    static auto mypub = node->create_publisher<geometry_msgs::msg::Vector3>("/pterr", qos_profile);
+    geometry_msgs::msg::Vector3 msg_err;
 
     cv::Mat img = cv::imdecode(cv::Mat(msg->data), cv::IMREAD_COLOR);
     cv::imshow("win0", img);
@@ -86,12 +88,18 @@ void mysub_callback(rclcpp::Node::SharedPtr node, const sensor_msgs::msg::Compre
     RCLCPP_INFO(node->get_logger(), "Received Image : %s,%d,%d", msg->format.c_str(),img.rows,img.cols);
     
     cv::Mat pre = preprocess(img);
-    int err = calc_err(pre);
+
+    int err = calc_err(pre) - 320;
 
     cv::waitKey(1);
+
+    int vel1 = def_speed + (err*k);
+    int vel2 = -1 * (def_speed - (err*k));
     
-    msg_err.data = err;
-    RCLCPP_INFO(node->get_logger(), "Publish: %d", msg_err.data);
+    msg_err.x = vel1;
+    msg_err.y = vel2;
+
+    RCLCPP_INFO(node->get_logger(), "Publish: %lf, %lf", msg_err.x,  msg_err.y);
     mypub->publish(msg_err);
 }
 
