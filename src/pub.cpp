@@ -79,7 +79,7 @@ int calc_err(Mat gray_img) {
 void mysub_callback(rclcpp::Node::SharedPtr node, const sensor_msgs::msg::CompressedImage::SharedPtr msg)
 {
     static auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10));
-    static auto mypub = node->create_publisher<geometry_msgs::msg::Vector3>("/pterr", qos_profile);
+    static auto mypub = node->create_publisher<geometry_msgs::msg::Vector3>("/motor_speed", qos_profile);
     geometry_msgs::msg::Vector3 msg_err;
 
     cv::Mat img = cv::imdecode(cv::Mat(msg->data), cv::IMREAD_COLOR);
