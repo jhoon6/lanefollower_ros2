@@ -12,9 +12,9 @@ ros2 run lanefollower_ros2 pub
 ros2 run lanefollower_ros2 sub
 `
 
-pub 실행은 /image/compressed 에서 영상을 받아 엑추에이터 속도를 계산합니다
+pub 실행은 /image/compressed 에서 영상을 받아 엑추에이터 속도를 계산하고 속도 값 토픽을 발행합니다.
 
-sub 실행은 다이나믹셀 엑추에이터에 명령을 내립니다.
+sub 실행은 속도 값 토픽을 구독하여 다이나믹셀 엑추에이터에 속도를 전달합니다.
 
 ## 실제 주행 영상
 - https://www.youtube.com/watch?v=kd0MUSpDgi0
