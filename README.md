@@ -1,6 +1,6 @@
 # ROS2 레인팔로워 노드
 
-![주행 영상 움짤](https://files.catbox.moe/kxqio1.webp)
+![주행 영상 움짤](https://files.catbox.moe/pe5rfi.webp)
 
 https://github.com/jhoon6/LaneFollower
 
