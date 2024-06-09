@@ -2,7 +2,7 @@
 
 ![주행 영상 움짤](https://files.catbox.moe/pe5rfi.webp)
 
-https://github.com/jhoon6/LaneFollower
+https://github.com/jhoon6/LaneFollower 의 ROS2 노드화
 
 `
 ros2 run lanefollower_ros2 pub
